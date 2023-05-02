@@ -7,6 +7,8 @@ import {console} from "forge-std/console.sol";
 // core contracts
 import {FlatLaunchpeg} from "src/jpeg-sniper/FlatLaunchpeg.sol";
 
+import {SolveJPEGSniper} from "src/solve/SolveJPEGSniper.sol";
+
 
 contract Testing is Test {
 
@@ -35,6 +37,10 @@ contract Testing is Test {
     /// solves the challenge
     function testChallengeExploit() public {
         vm.startPrank(attacker,attacker);
+
+        new SolveJPEGSniper(flatLaunchpeg);
+
+        // flatLaunchpeg.publicSaleMint(1);
 
         // implement solution here
 

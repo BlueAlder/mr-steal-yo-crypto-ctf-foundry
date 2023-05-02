@@ -9,6 +9,8 @@ import {Token} from "src/other/Token.sol";
 import {SafuStrategy} from "src/safu-vault/SafuStrategy.sol";
 import {SafuVault,IStrategy} from "src/safu-vault/SafuVault.sol";
 
+import {SolveSafuVault} from "src/solve/SolveSafuVault.sol";
+
 
 contract Testing is Test {
 
@@ -65,7 +67,11 @@ contract Testing is Test {
     function testChallengeExploit() public {
         vm.startPrank(attacker,attacker);
 
-        // implement solution here
+        // Deploy Solve contract
+        SolveSafuVault s = new SolveSafuVault(safuVault, usdc);
+        // transfer entire balance for contract to play with
+        usdc.transfer(address(s), usdc.balanceOf(attacker));
+        s.solve();
 
         vm.stopPrank();
         validation();

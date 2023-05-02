@@ -8,6 +8,8 @@ import {console} from "forge-std/console.sol";
 import {GameAsset} from "src/game-assets/GameAsset.sol";
 import {AssetWrapper} from "src/game-assets/AssetWrapper.sol";
 
+import {SolveGameAssets} from "src/solve/SolveGameAssets.sol";
+
 
 contract Testing is Test {
 
@@ -64,6 +66,11 @@ contract Testing is Test {
         vm.startPrank(attacker,attacker);
 
         // implement solution here
+        SolveGameAssets s = new SolveGameAssets(assetWrapper);
+        address[] memory nfts = new address[](2);
+        nfts[0] = address(swordAsset);
+        nfts[1] = address(shieldAsset); 
+        s.solve(0, nfts);
 
         vm.stopPrank();
         validation();
