@@ -19,6 +19,13 @@ contract SolveGameAssets {
     }
   }
 
+// Callback happens before all checks are completed meaning that we can 
+// Unwrap the token just given to us through re-entrancy which will then 
+// proceed to give us the ownership of the token since the contract has been
+// set as the operator.
+
+// Then since we have already unwrapped our token before the ownership changed
+// there is no way for the assets to unlock.
   function onERC1155Received(
         address,
         address,
